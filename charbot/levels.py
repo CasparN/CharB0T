@@ -148,14 +148,14 @@ class Leveling(commands.Cog):
                     return
                 if gained + user["detailed_xp"][0] >= self._xp_function(user["level"]):
                     new_level = user["level"] + 1
-                    detailed = [0, self._xp_function(new_level), user["xp"] + gained]
+                    detailed[0] = [0, self._xp_function(new_level), user["xp"] + gained]
                     new_xp = detailed[2]
                     await message.channel.send(
                         f"{message.author.mention} has done some time, and is now level **{new_level}**."
                     )
                     await update_level_roles(member, new_level)
                 else:
-                    detailed = user["detailed_xp"]
+                    detailed[0] = user["detailed_xp"]
                     new_level = user["level"]
                     new_xp = user["xp"] + gained
                 await conn.execute(
